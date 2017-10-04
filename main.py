@@ -1,7 +1,9 @@
-import requests
+from requests import Session
 import thread
 
-word = requests.get('http://setgetgo.com/randomword/get.php').text
+session = Session()
+
+word = session.get('http://setgetgo.com/randomword/get.php').text
 
 correctGuesses = []
 
@@ -25,8 +27,8 @@ def askForGuess():
     character = raw_input("Please guess a character")
     if not word.__contains__(character):
         print "Whoops! please try again!"
-        print "you have %s remaining lives!" % (str(lives))
-        lives = - 1
+        print "you have {} remaining lives!".format(str(lives))
+        lives -= 1
         if lives == 0:
             print "You have run out of lives! Better luck next time"
             quit()
@@ -38,7 +40,7 @@ def askForGuess():
     print "Correct! You have guessed a letter correctly, so far you have found!"
     soFar = printWord()
     if not soFar.__contains__("_"):
-        print "Congratulations! You have guess the word! It was %s" % word
+        print "Congratulations! You have guess the word! It was {}".format(word)
     askForGuess()
     return
 
