@@ -2,15 +2,9 @@ import requests
 import thread
 
 word = requests.get('http://setgetgo.com/randomword/get.php').text
-print word
 
 correctGuesses = []
 
-underscores = ""
-for char in word:
-    underscores.__add__("_")
-
-print (underscores)
 lives = 10
 
 
@@ -49,4 +43,5 @@ def askForGuess():
     return
 
 
+printWord()
 thread.start_new_thread(askForGuess(), 0)
